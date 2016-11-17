@@ -12,13 +12,35 @@ public  abstract class Joueur {
 	public enum divinite {
 		JOUR,AUBE,NUIT,CRESPUSCULE
 	}
-	private int ptActionJour;
-	private int ptActionNuit;
-	private int ptActionNeant;
-	private int ptPriere;
+	private int ptActionJour=3;
+	private int ptActionNuit=0;
+	private int ptActionNeant=0;
+	private int ptPriere=0;
 	private enum capaciteSpeciale{}
 	private boolean disponibiliteCapacite;
 	protected Main laMain;
+	
+	public void setPtActionJour(int PtActionJour){
+		ptActionJour = PtActionJour;
+	}
+	
+	public int getPtActionJour(){
+		return ptActionJour;
+	}
+	
+	public void setPtActionNuit(int PtActionNuit){
+		ptActionNuit = PtActionNuit;
+	}
+	public int getPtActionNuit(){
+		return ptActionNuit;
+	}
+	public void setPtActionNeant(int PtActionNeant){
+		ptActionNeant = PtActionNeant;
+	}
+	public int getPtActionNeant(){
+		return ptActionNeant;
+	}
+	
 	
 	public abstract void lancerDeCosmogonie();
 	

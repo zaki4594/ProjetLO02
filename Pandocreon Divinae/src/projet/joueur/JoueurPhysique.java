@@ -49,10 +49,29 @@ public void piocheDivinite(){
 	}
 	public  void getLaMain(){
 		   System.out.println("Vous avez les cartes suivantes:");
-		   for (int i=0; i< laMain.getListeCartesMain().size(); i++){
+		  for (int i=0; i< laMain.getListeCartesMain().size(); i++){
+		  // 	for (Iterator<Carte> it = laMain.getListeCartesMain().iterator(); it.hashNext();)
+		   			
 			   System.out.println(laMain.getListeCartesMain().get(i).afficherCarte());
 		   }
 	   }
+	public void choisirCarte(){
+		int id;
+		System.out.println("Mettez l'id de la carte à jouer: ");
+		id = scan.nextInt();
+		for (int i=0; i<laMain.getListeCartesMain().size(); i++){
+			if (laMain.getListeCartesMain().get(i).getIdCarte()==id){
+				laMain.getListeCartesMain().get(i).calculerPtAction(this);
+				if (laMain.getListeCartesMain().get(i).utilisee()==true){
+					System.out.println("Vous avez joué la carte c_ "+ laMain.getListeCartesMain().get(i).getIdCarte());
+					laMain.getListeCartesMain().remove(i);
+				}
+				else {
+					System.out.println("La carte que vous choissiez n'est pas utilisable!");
+				}
+			}
+		}
+	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

@@ -42,6 +42,10 @@ public class Partie {
 		j1.setLaMain(m1);
 		s.distribuerCartes(m1);
 		j1.getLaMain();
+		while (j1.laMain.getListeCartesMain().size() >0){
+			j1.choisirCarte();
+		}
+		
 	}
 
 }

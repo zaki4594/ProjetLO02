@@ -1,4 +1,7 @@
 package projet.cartes;
+
+import projet.joueur.Joueur;
+
 /**
  * La classe Carte représente les Cartes dans le jeu
  * @author Tung NGO
@@ -11,7 +14,71 @@ public abstract class   Carte {
 	protected TypeCarte type; // Le type (Carte Croyants, Guide Spirituel, Deus Ex, Apocalypse) de la Carte
 	protected Origine origine; // L'orgine (Jour, Nuit, Neant) de la Carte
 	protected CapaciteSpeciale capaciteSpeciale; // La capacité spéciale de la Carte
+	protected boolean estUtilisable;
 	public abstract String afficherCarte();
+	public boolean utilisee(){
+		if (estUtilisable == true){
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public int getIdCarte(){
+		return idCarte;
+	}
+	/**
+	 * Recalculer les points Action du joueur quand il joue une carte
+	 * @param joueur
+	 */
+	public void calculerPtAction(Joueur joueur){
+		switch(origine) {
+		case None:
+			estUtilisable = true;
+			break;
+		case Jour:
+			if (joueur.getPtActionJour()<1){
+				estUtilisable = false;
+			}
+			else {
+				estUtilisable = true;
+				joueur.setPtActionJour(joueur.getPtActionJour()-1);
+			}
+			break;
+		case Nuit:
+			if (joueur.getPtActionNuit()<1){
+				estUtilisable = false;
+			}
+			else {
+				estUtilisable = true;
+				joueur.setPtActionNuit(joueur.getPtActionNuit()-1);
+			}
+			break;
+		case Neant:
+			if (joueur.getPtActionNeant()<1){
+				if (joueur.getPtActionJour()<2) {
+					if(joueur.getPtActionNuit()<2){
+						estUtilisable = false;
+					}
+					else {
+						estUtilisable = true;
+						joueur.setPtActionNuit(joueur.getPtActionNuit()-2);
+					}
+				}
+				else {
+					estUtilisable = true;
+					joueur.setPtActionJour(joueur.getPtActionJour()-2);
+					}
+					
+				}
+			else {
+				estUtilisable = true;
+				joueur.setPtActionNeant(joueur.getPtActionNeant()-1);
+			}
+		
+			break;
+		}
+	}
 }
 
 
